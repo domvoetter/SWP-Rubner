@@ -1,0 +1,14 @@
+    """
+    if(optionPlayer == 'stein') and ((optionBot == 'echse') or (optionBot == 'schere')):
+        return True
+    elif(optionPlayer == 'papier') and ((optionBot == 'stein') or (optionBot == 'spock')):
+        return True
+    elif(optionPlayer == 'schere') and ((optionBot == 'papier') or (optionBot == 'echse')):
+        return True
+    elif(optionPlayer == 'echse') and ((optionBot == 'spock') or (optionBot == 'papier')):
+        return True
+    elif(optionPlayer == 'Spock') and ((optionBot == 'Schere') or (optionBot == 'Stein')):
+        return True
+    else:
+        return False
+    """
