@@ -1,7 +1,9 @@
-from SWP-Runner.OOP_uebung.Person import Person
-
+from Person import Person
 
 class Mitarbeiter(Person):
-    def __init__(self, vorname, nachname, geburtsdatum, geschlecht, personalnummer):
-        super().__init__(vorname, nachname, geburtsdatum, geschlecht)
+    def __init__(self, person, personalnummer):
+        super().__init__(person.vorname, person.nachname, person.geburtsdatum, person.geschlecht)
         self.personalnummer = personalnummer
+
+    def __str__(self):
+        return f"{super.__str__(self.vorname, self.nachname, self.geburtsdatum, self.geschlecht)} Nummer: {self.personalnummer}"
