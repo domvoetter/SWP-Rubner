@@ -15,11 +15,11 @@ def ziehung(anz):
         value = zahlen[index]
         zahlen[index] = zahlen[len(zahlen)-1-i]
         zahlen[len(zahlen)-1-i] = value
-        statistik(index)
+        statistik(value)
         i += 1
 
 def statistik(x):
-    dict[x+1] +=1
+    dict[x] +=1
 
 if __name__ == "__main__":
     ziehung_range(1, 10)
