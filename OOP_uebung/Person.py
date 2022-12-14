@@ -11,5 +11,7 @@ class Person:
         self.geburtsdatum = geburtsdatum
         self.geschlecht = geschlecht
 
-        def __str__(self):
-            return "Name: " + self.vorname + self.nachname + " Geburtsdatum: " + self.geburtsdatum + " Geschlecht: " + self.geschlecht + "\n"
+    def __str__(self):
+        return f"Name: {self.vorname} {self.nachname} \
+            Geburtsdatum: {self.geburtsdatum} \
+                Geschlecht: {self.geschlecht} \n"

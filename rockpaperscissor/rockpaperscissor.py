@@ -44,7 +44,7 @@ def playerWins(optionPlayer, optionBot):
         return False
 
     
-def bestPlayer():
+def bestPlayer(name):
     connection = sqlite3.connect('rockpaperscissor/data/rockpaperscissor.sqlite3')
     cursor = connection.cursor()
     sql = "SELECT COUNT(*) as anz, name FROM stats WHERE result = 'win' GROUP BY name ORDER BY anz DESC;"
@@ -68,7 +68,7 @@ def bestPlayer():
     #    i += 1
     #print("Der beste Benutzer: " + bestUser)
     connection.close()
-    startGame()
+    startGame(name, True)
 
 
 
@@ -104,7 +104,7 @@ def normalGame(x, name):
         optionBot = random.choice(options)
         player, bot = completeRound(name,optionPlayer, optionBot, player, bot)
         print("Score: \n Player: " + str(player) + "     Bot: " + str(bot))
-    startGame()
+    startGame(name, True)
 
 
 def getPlayerFavouriteOption(name, which):
@@ -156,7 +156,7 @@ def hardGame(anz, name):
         optionPlayer = input("Ihre Wahl: ").lower()
         player, bot = completeRound(name,optionPlayer, optionBot, player, bot)
         print("Score: \n Player: " + str(player) + "     Bot: " + str(bot))
-    startGame()
+    startGame(name, True)
 
 def impossibleGame(anz, name):
     player = 0
@@ -179,7 +179,7 @@ def impossibleGame(anz, name):
         optionBot = random.choice(newoptions)
         player, bot = completeRound(name,optionPlayer, optionBot, player, bot)
         print("Score: \n Player: " + str(player) + "     Bot: " + str(bot))
-    startGame()
+    startGame(name, True)
     
 
 def upload(name):
@@ -194,10 +194,10 @@ def upload(name):
         cnt = cursor.fetchone()[0]
         response = requests.put('%s/%s' % (host, name), data={'name' : name, 'symbol' : d, 'symbolanzahl' : cnt})
     print("Erfolgreich hochgeladen!")
-    startGame()
+    startGame(name, True)
 
 
-def botVSbot():
+def botVSbot(name):
     bot1 = 0
     bot2 = 0
     draw = 0
@@ -222,7 +222,7 @@ def botVSbot():
     label = ["Computer 1", "Computer 2", "Draw"]
     plt.pie(circle_values, labels = label, autopct='%1.2f%%')
     plt.show()
-    startGame()
+    startGame(name, True)
 
 
 def printStats(name):
@@ -260,37 +260,36 @@ def printStats(name):
     print("Der Computer hat am öftesten " + str(botMostPlayedOption) + " gespielt")
 
     connection.close()
-    startGame()
+    startGame(name, True)
 
-def startGame():
+def startGame(name, namefertig):
+    if not namefertig:
+        name = input("Bitte geben Sie einen Namen ein: ")
     mode = input("Was wollen Sie tun? (spielen oder stats oder upload oder spezial): ")
     if mode == "stats":
-        name = input("Bitte geben Sie einen Namen ein: ")
-        x = input("Statistik oder Grafix oder Bestenliste? ")
+        x = input("Statistik oder Bestenliste? ")
         if x.lower() == "statistik":
             printStats(name)
         elif x.lower() == "bestenliste":
-            bestPlayer()
+            bestPlayer(name)
         else:
             print("Ungültige Eingabe!")
     elif mode == "spielen":
-        name = input("Bitte geben Sie einen Namen ein: ")
         x = input("Wie viele Runden wollen Sie spielen? ")
         modus = input("Wie wollen sie spielen? normal oder schwer oder unmoeglich: ")
         if modus == "normal": normalGame(int(x), name)
         if modus == "schwer": hardGame(int(x), name)
         if modus == "unmoeglich": impossibleGame(int(x), name)
     elif mode == "upload":
-        name = input("Bitte geben Sie einen Namen ein: ")
         upload(name)
     elif mode == "spezial":
-        botVSbot()
+        botVSbot(name)
     elif mode == "exit":
         return
     else:
         print("Ungültige Eingabe!")
-        startGame()
+        startGame(name, True)
 
 
 if __name__ == "__main__":
-    startGame()
+    startGame("", False)

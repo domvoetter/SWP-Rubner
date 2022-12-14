@@ -1,8 +1,15 @@
+from matplotlib import pyplot as plt
+import numpy as np
+
 class Firma:
 
     def __init__(self, firmenname):
         self.firmenname = firmenname
         self.abteilungen = []
+
+    def __str__(self):
+        return f"Firmenname: {self.firmenname} \
+            Anzahl der Abteilungen: {len(self.abteilungen)}"
 
     def anzMitarbeiter(self):
         anz = 0
@@ -38,3 +45,9 @@ class Firma:
                     anzfrauen += 1
         prozent = anzfrauen / anzmaenner * 100
         print("Der Prozentanteil Frauen zu Männer beträgt " + str(prozent) + "\n")
+
+        circle_values = np.array([anzfrauen, anzmaenner])
+        label = ["Frauen", "Maenner"]
+        plt.pie(circle_values, labels = label, autopct='%1.2f%%')
+        plt.show()
+        
