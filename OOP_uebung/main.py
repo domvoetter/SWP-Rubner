@@ -79,7 +79,7 @@ def start(firma):
         return
     else:
         print("ungültige Eingabe")
-        start()
+        start(firma)
 
 
 if __name__ == "__main__":

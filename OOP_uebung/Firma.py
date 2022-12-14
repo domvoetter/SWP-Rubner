@@ -31,6 +31,7 @@ class Firma:
         size = 0
         for a in self.abteilungen:
             if len(a.mitarbeiter) > size:
+                size = len(a.mitarbeiter)
                 name = a.abteilungsname
         print("Die Abteilung " + name + " hat die größte Mitarbeiterstärke \n")
     
