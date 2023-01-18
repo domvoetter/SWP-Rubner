@@ -1,0 +1,15 @@
+from EinfachVerketteteListe import *
+
+list = EinfachVerketteteListe()
+list.addLast(1)
+list.addLast(2)
+list.addLast(3)
+list.addLast(4)
+list.addLast(5)
+list.insertAfter(2, 10)
+list.delete(3)
+list.writeList()
+print("Erstes Element: " + str(list.getFirstElem().getObj()))
+print("Ist '3' enthalten? " + str(list.find("3")))
+print("Ist '5' enthalten? " + str(list.find("5")))
+print("letztes Element: " + str(list.getLastElem().getObj()))
