@@ -1,9 +1,10 @@
+from copy import copy
 from ListElement import *
 
 class EinfachVerketteteListe:
 
     def __init__(self):
-        self.startElem = ListElement("Kopf")
+        self.startElem = ListElement(0)
 
 
     # append
@@ -25,7 +26,6 @@ class EinfachVerketteteListe:
 
 
     # remove
-    # TODO: Inhalt des gelöschten Elements als Rückgabewert
     def delete(self, o):
         le = self.startElem
         while le.getNextElem() != None and le.getObj() != o:
@@ -36,9 +36,20 @@ class EinfachVerketteteListe:
                     le.setNextElem(None)
                     break
             le = le.getNextElem()
+        return o
 
     # index
-    # TODO: index zurückgeben
+    def index(self, o):
+        le = self.startElem
+        cnt = 0
+        while le != None:
+            cnt += 1
+            if le.getObj() == o:
+                return cnt-1
+            le = le.nextElem
+        return None
+
+
     def find(self, o):
         le = self.startElem
         while le != None:
@@ -58,10 +69,11 @@ class EinfachVerketteteListe:
             le = le.getNextElem()
         return le
 
+
     def writeList(self):
         le = self.startElem
         while le != None:
-            print(str(le.getObj()) + "\n")
+            print(str(le.getObj()) + "  ")
             le = le.getNextElem()
 
     
@@ -74,18 +86,60 @@ class EinfachVerketteteListe:
             le = le.nextElem
         return cnt
 
-    def index(self, o):
-        le = self.startElem
-        cnt = 0
-        while le != None:
-            cnt += 1
-            if le.nextElem.getObj() == o:
-                return cnt
-            le = le.nextElem
-        return None
 
     # clear (ganze Liste löschen)
+    def clear(self):
+        le = self.startElem
+        zw = le
+        for i in range(self.printLength()):
+            if zw.getNextElem() is not None:
+                le = zw.getNextElem()
+                zw = copy(le)
+                self.delete(le.getObj())
+            else:
+                self.delete(self.getFirstElem().getObj())
+                self.delete(self.getLastElem().getObj())
+
+
     # copy
+    def copyList(self):
+        copied = EinfachVerketteteListe()
+        le = self.startElem
+        while le is not None:
+            if le.getNextElem() is not None:
+                le = le.getNextElem()
+                copied.addLast(le.getObj())
+            else:
+                return copied
+
+
     # extend (hinzufügen aller Elemente einer anderen Liste)
+    def extend(self, secondList):
+        le = secondList.startElem.getNextElem()
+        while le is not None:
+            self.addLast(le.getObj())
+            le = le.getNextElem()
+
     # pop ( löscht den Eintrag aus der Liste des übergebenen Index und liefert dessen Inhalt als Rückgabewert )
+    def pop(self, index):
+        le = self.startElem
+        for c in range(index):
+            le = le.getNextElem()
+        self.delete(le.getObj())
+        return le.getObj()
+
+
     # sort
+    def sort(self):
+        minimum = None
+        le = self.startElem
+        while le != None:
+            minimum = le.getNextElem()
+            while minimum != None:
+                print(minimum.getObj())
+                if(le.getObj() > minimum.getObj()):
+                    a = le.getNextElem()
+                    le.setObj(minimum)
+                    self.addLast(a)
+                minimum = minimum.getNextElem()
+            le = le.getNextElem()

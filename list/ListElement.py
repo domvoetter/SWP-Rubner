@@ -13,3 +13,6 @@ class ListElement:
 
     def getObj(self):
         return self.obj
+
+    def setObj(self, obj):
+        self.obj = obj
