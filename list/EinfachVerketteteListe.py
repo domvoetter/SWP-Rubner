@@ -1,7 +1,6 @@
 from copy import copy
 from ListElement import *
 
-#Test
 class EinfachVerketteteListe:
 
     def __init__(self):
