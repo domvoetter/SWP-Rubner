@@ -10,13 +10,13 @@ public class Kunde {
     {
         Pizzeria berlin = new BerlinPizzeria();
         Pizzeria hamburg = new HamburgPizzeria();
-        Pizzeria rohstock = new RohstockPizzeria();
+        Pizzeria rostock = new RostockPizzeria();
 
         switch(standort)
         {
-            case "Berlin": return berlin.createPizza(sorte);
-            case "Hamburg": return hamburg.createPizza(sorte);
-            case "Rohstock": return rohstock.createPizza(sorte);
+            case "Berlin": return berlin.orderPizza(sorte);
+            case "Hamburg": return hamburg.orderPizza(sorte);
+            case "Rostock": return rostock.orderPizza(sorte);
             default: return null;
         }
     }
