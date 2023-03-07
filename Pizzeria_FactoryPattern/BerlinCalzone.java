@@ -1,18 +1,21 @@
 package Pizzeria_FactoryPattern;
 
-public class BerlinCalzone {
+public class BerlinCalzone extends Pizza{
 
-    public static void backen()
+    @Override
+    void backen()
     {
         System.out.println("Diese Berliner Calzone wurde gebacken");
     }
 
-    public static void schneiden()
+    @Override
+    void schneiden()
     {
         System.out.println("Diese Berliner Calzone wurde geschnitten");
     }
 
-    public static void einpacken()
+    @Override
+    void einpacken()
     {
         System.out.println("Diese Berliner Calzone wurde eingepackt");
     }

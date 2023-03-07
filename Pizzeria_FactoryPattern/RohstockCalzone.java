@@ -1,18 +1,21 @@
 package Pizzeria_FactoryPattern;
 
-public class RohstockCalzone {
+public class RohstockCalzone extends Pizza{
 
-    public static void backen()
+    @Override
+    void backen()
     {
         System.out.println("Diese Rohstocker Calzone wurde gebacken");
     }
 
-    public static void schneiden()
+    @Override
+    void schneiden()
     {
         System.out.println("Diese Rohstocker Calzone wurde geschnitten");
     }
 
-    public static void einpacken()
+    @Override
+    void einpacken()
     {
         System.out.println("Diese Rohstocker Calzone wurde eingepackt");
     }

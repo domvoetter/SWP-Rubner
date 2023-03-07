@@ -1,18 +1,21 @@
 package Pizzeria_FactoryPattern;
 
-public class HamburgQuattroStagioni {
+public class HamburgQuattroStagioni extends Pizza{
 
-    public static void backen()
+    @Override
+    void backen()
     {
         System.out.println("Diese Hamburger Quattro Stagioni wurde gebacken");
     }
 
-    public static void schneiden()
+    @Override
+    void schneiden()
     {
         System.out.println("Diese Hamburger Quattro Stagioni wurde geschnitten");
     }
 
-    public static void einpacken()
+    @Override
+    void einpacken()
     {
         System.out.println("Diese Hamburger Quattro Stagioni wurde eingepackt");
     }

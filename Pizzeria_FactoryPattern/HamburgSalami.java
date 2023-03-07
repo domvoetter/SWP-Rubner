@@ -1,18 +1,21 @@
 package Pizzeria_FactoryPattern;
 
-public class HamburgSalami {
+public class HamburgSalami extends Pizza {
 
-    public static void backen()
+    @Override
+    void backen()
     {
         System.out.println("Diese Hamburger Salami wurde gebacken");
     }
 
-    public static void schneiden()
+    @Override
+    void schneiden()
     {
         System.out.println("Diese Hamburger Salami wurde geschnitten");
     }
 
-    public static void einpacken()
+    @Override
+    void einpacken()
     {
         System.out.println("Diese Hamburger Salami wurde eingepackt");
     }

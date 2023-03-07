@@ -1,14 +1,13 @@
 from copy import copy
 from ListElement import *
 
-class EinfachVerketteteListe:
+class DoppeltVerketteteListe:
 
     def __init__(self):
         self.startElem = ListElement("Kopf")
         self.prevElem = ListElement("Schwanz")
 
 
-    # fertig angepasst
     # append
     def addLast(self, o):
         newElem = ListElement(o)
@@ -16,19 +15,35 @@ class EinfachVerketteteListe:
         lastElem.setNextElem(newElem)
         newElem.setPrevElem(lastElem)
 
-    #ToDO
+
     # insert
     def insertAfter(self, prevItem, newItem):
         pointerElem = self.startElem.getNextElem()
         while pointerElem != None and pointerElem.getObj() != prevItem:
             pointerElem = pointerElem.getNextElem()
         newElem = ListElement(newItem)
-        nextElem = pointerElem.getNextElem()
-        pointerElem.setNextElem(newElem)
-        newElem.setNextElem(nextElem)
+        if pointerElem != None:
+            nextElem = pointerElem.getNextElem()
+            pointerElem.setNextElem(newElem)
+            newElem.setNextElem(nextElem)
+            newElem.setPrevElem(pointerElem)
+        if nextElem != None:
+            nextElem.setPrevElem(newElem)
 
 
-    #ToDO
+    def insertBefore(self, insertElem, newItem):
+        newElem = ListElement(newItem)
+        pointerElem = self.startElem.getNextElem()
+        while pointerElem != None:
+            if pointerElem.getObj() == insertElem:
+                newElem.setPrevElem(pointerElem.getPrevElem())
+                pointerElem.getPrevElem().setNextElem(newElem)
+                pointerElem.setPrevElem(newElem)
+                newElem.setNextElem(pointerElem)
+                break
+            pointerElem = pointerElem.getNextElem()
+
+
     # remove
     def delete(self, o):
         le = self.startElem
@@ -36,13 +51,14 @@ class EinfachVerketteteListe:
             if le.getNextElem().getObj() == o:
                 if le.getNextElem().getNextElem() != None:
                     le.setNextElem(le.getNextElem().getNextElem())
+                    le.getNextElem().setPrevElem(le)
                 else:
                     le.setNextElem(None)
                     break
             le = le.getNextElem()
         return o
 
-    #ToDO
+
     # index
     def index(self, o):
         le = self.startElem
@@ -54,7 +70,7 @@ class EinfachVerketteteListe:
             le = le.nextElem
         return None
 
-    #ToDO
+
     def find(self, o):
         le = self.startElem
         while le != None:
@@ -63,11 +79,11 @@ class EinfachVerketteteListe:
             le = le.nextElem
         return False
 
-    #ToDO
+
     def getFirstElem(self):
         return self.startElem
 
-    #ToDO    
+
     def getLastElem(self):
         le = self.startElem
         while le.getNextElem() != None:
@@ -81,7 +97,7 @@ class EinfachVerketteteListe:
             print(str(le.getObj()) + "  ")
             le = le.getNextElem()
 
-     #ToDO   
+
     # count
     def printLength(self):
         le = self.startElem

@@ -1,18 +1,21 @@
 package Pizzeria_FactoryPattern;
 
-public class RohstockHawaii {
+public class RohstockHawaii extends Pizza{
 
-    public static void backen()
+    @Override
+    void backen()
     {
         System.out.println("Diese Rohstocker Hawaii wurde gebacken");
     }
 
-    public static void schneiden()
+    @Override
+    void schneiden()
     {
         System.out.println("Diese Rohstocker Hawaii wurde geschnitten");
     }
 
-    public static void einpacken()
+    @Override
+    void einpacken()
     {
         System.out.println("Diese Rohstocker Hawaii wurde eingepackt");
     }
