@@ -1,25 +1,29 @@
 from copy import copy
-from ListElement import *
+from ListElementEinfach import *
 
 class EinfachVerketteteListe:
 
     def __init__(self):
-        self.startElem = ListElement(0)
+        self.startElem = ListElementEinfach(None)
 
 
     # append
     def addLast(self, o):
-        newElem = ListElement(o)
-        lastElem = self.getLastElem()
-        lastElem.setNextElem(newElem)
+        if self.startElem.getObj == None:
+            self.startElem = ListElementEinfach(o)
+        else:
+            newElem = ListElementEinfach(o)
+            lastElem = self.getLastElem()
+            lastElem.setNextElem(newElem)
 
 
     # insert
     def insertAfter(self, prevItem, newItem):
+        nextElem = ListElementEinfach(None)
         pointerElem = self.startElem.getNextElem()
         while pointerElem != None and pointerElem.getObj() != prevItem:
             pointerElem = pointerElem.getNextElem()
-        newElem = ListElement(newItem)
+        newElem = ListElementEinfach(newItem)
         nextElem = pointerElem.getNextElem()
         pointerElem.setNextElem(newElem)
         newElem.setNextElem(nextElem)
@@ -130,7 +134,7 @@ class EinfachVerketteteListe:
 
 
     # sort
-    def sort(self):
+    def sortalt(self):
         minimum = None
         le = self.startElem
         while le != None:
@@ -143,3 +147,29 @@ class EinfachVerketteteListe:
                     self.addLast(a)
                 minimum = minimum.getNextElem()
             le = le.getNextElem()
+
+    def sort(self):
+        if not self.startElem:
+            return
+    
+        swapped = True
+        while swapped:
+            swapped = False
+            current = self.startElem
+            while current.nextElem:
+                runner = current.nextElem
+                if current.obj is not None and runner.obj is not None: # Vergleichsbedingung hinzufügen
+                    if current.obj > runner.obj:
+                        current.obj, runner.obj = runner.obj, current.obj
+                        swapped = True
+                current = current.nextElem
+
+    def reverse(self):
+        previousElem = None
+        currentElem = self.startElem
+        while currentElem:
+            nextElem = currentElem.getNextElem()
+            currentElem.nextElem = previousElem
+            previousElem = currentElem
+            currentElem = nextElem
+        self.startElem = previousElem

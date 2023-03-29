@@ -1,4 +1,4 @@
-class ListElement:
+class ListElementDoppelt:
 
     def __init__(self, obj):
         self.obj = obj
